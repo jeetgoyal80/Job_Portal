@@ -20,7 +20,7 @@ app.use(morgan('dev'));
 
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://job-portal-1-5puv.onrender.com',
   credentials: true
 }));
 
