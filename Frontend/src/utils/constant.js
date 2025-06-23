@@ -1,4 +1,4 @@
-export const EndPointUserURL = 'http://localhost:4000/api/user'
-export const EndPointUserURLJOB = 'http://localhost:4000/api/user/job'
-export const EndPointUserURLAPPLICATION = 'http://localhost:4000/api/applications'
-export const EndPointUserURLCOMPANY = 'http://localhost:4000/api/user/company'
+export const EndPointUserURL = `${import.meta.env.Vite_backent_url}/api/user`
+export const EndPointUserURLJOB = `${import.meta.env.Vite_backent_url}/api/user/job`
+export const EndPointUserURLAPPLICATION = `${import.meta.env.Vite_backent_url}/api/applications`
+export const EndPointUserURLCOMPANY = `${import.meta.env.Vite_backent_url}/api/user/company`
