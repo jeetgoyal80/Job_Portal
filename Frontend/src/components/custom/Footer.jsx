@@ -1,79 +1,123 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Linkedin, Twitter, Instagram } from "lucide-react";
 
 const Footer = () => {
-  const user = useSelector(store => store.auth.user);
-  const userrole = user?.role || 'guest';
+  const user = useSelector((store) => store.auth.user);
+  const userrole = user?.role || "guest";
 
-  const showForStudent = userrole === 'student';
-  const showForRecruiter = userrole === 'recruiter';
-  const isGuest = userrole === 'guest';
+  const isGuest = userrole === "guest";
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10 mt-12">
-      <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        
-        {/* About Section */}
-        <div>
-          <h3 className="text-white text-xl font-bold mb-4">Job Portal</h3>
-          <p className="text-gray-400 text-sm">
-            Your trusted platform to find the best job opportunities and connect with top companies.
-          </p>
-        </div>
+    <footer className="bg-slate-900 text-slate-300 mt-20">
+      <div className="max-w-7xl mx-auto px-6 py-16">
 
-        {/* Quick Links */}
-        <div>
-          <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/" className="hover:text-orange-500 transition">Home</Link></li>
+        {/* GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
 
-            {showForStudent && (
-              <li><Link to="/job" className="hover:text-orange-500 transition">Jobs</Link></li>
-            )}
+          {/* BRAND */}
+          <div>
+            <h3 className="text-2xl font-semibold text-white">
+              CareerBridge India
+            </h3>
 
-            {(showForStudent || isGuest) && (
-              <li><Link to="/browse" className="hover:text-orange-500 transition">Browse</Link></li>
-            )}
+            <p className="text-slate-400 text-sm mt-4 leading-relaxed">
+              Connecting students and professionals with top companies
+              across India. Discover opportunities in technology, finance,
+              design, and emerging industries.
+            </p>
 
-            {showForRecruiter && (
-              <li><Link to="/companies" className="hover:text-orange-500 transition">Companies</Link></li>
-            )}
+            <div className="mt-6 text-sm text-slate-400 space-y-1">
+              <p>Bengaluru, Karnataka, India</p>
+              <p>support@careerbridge.in</p>
+              <p>+91 80456 77890</p>
+            </div>
+          </div>
 
-            {isGuest && (
-              <>
-                <li><Link to="/login" className="hover:text-orange-500 transition">Login</Link></li>
-                <li><Link to="/signup" className="hover:text-orange-500 transition">Signup</Link></li>
-              </>
-            )}
-          </ul>
-        </div>
+          {/* JOB SEEKERS */}
+          <div>
+            <h4 className="text-white font-semibold mb-5">
+              Job Seekers
+            </h4>
 
-        {/* Contact Info */}
-        <div>
-          <h4 className="text-white font-semibold mb-4">Contact Us</h4>
-          <p className="text-sm">
-            123 Job St.<br />
-            Career City, 456789<br />
-            Email: support@jobportal.com<br />
-            Phone: +91 98765 43210
-          </p>
-        </div>
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li><Link to="/jobs" className="hover:text-white transition">Browse Jobs</Link></li>
+              <li><Link to="/browse" className="hover:text-white transition">Smart Discovery</Link></li>
+              <li><Link to="/companies" className="hover:text-white transition">Top Companies</Link></li>
+              <li><Link to="/career-advice" className="hover:text-white transition">Career Advice</Link></li>
 
-        {/* Social Media */}
-        <div>
-          <h4 className="text-white font-semibold mb-4">Follow Us</h4>
-          <div className="flex space-x-4 text-gray-400">
-            {/* Social icons (unchanged) */}
-            {/* Example for Facebook */}
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-orange-500 transition">
-              <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                <path d="M22.675 0h-21.35C.59 0 0 .59 0 1.326v21.348C0 23.411.59 24 1.326 24h11.495v-9.294h-3.123v-3.622h3.123v-2.672c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.466.098 2.797.142v3.24l-1.919.001c-1.504 0-1.796.715-1.796 1.763v2.312h3.59l-.467 3.622h-3.123V24h6.116C23.411 24 24 23.411 24 22.674V1.326C24 .59 23.411 0 22.675 0z" />
-              </svg>
-            </a>
-            {/* Add other icons similarly... */}
+              {isGuest && (
+                <>
+                  <li><Link to="/login" className="hover:text-white transition">Login</Link></li>
+                  <li><Link to="/signup" className="hover:text-white transition">Create Account</Link></li>
+                </>
+              )}
+            </ul>
+          </div>
+
+          {/* EMPLOYERS */}
+          <div>
+            <h4 className="text-white font-semibold mb-5">
+              Employers
+            </h4>
+
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li><Link to="/post-job" className="hover:text-white transition">Post a Job</Link></li>
+              <li><Link to="/talent-search" className="hover:text-white transition">Search Candidates</Link></li>
+              <li><Link to="/pricing" className="hover:text-white transition">Pricing Plans</Link></li>
+              <li><Link to="/recruiter-login" className="hover:text-white transition">Recruiter Login</Link></li>
+            </ul>
+          </div>
+
+          {/* CITIES + SOCIAL */}
+          <div>
+            <h4 className="text-white font-semibold mb-5">
+              Popular Cities
+            </h4>
+
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li>Bengaluru</li>
+              <li>Mumbai</li>
+              <li>Delhi NCR</li>
+              <li>Hyderabad</li>
+              <li>Pune</li>
+              <li>Chennai</li>
+            </ul>
+
+            <div className="mt-6 flex gap-5 text-slate-400">
+              <a href="#" className="hover:text-white transition">
+                <Linkedin size={20} />
+              </a>
+              <a href="#" className="hover:text-white transition">
+                <Twitter size={20} />
+              </a>
+              <a href="#" className="hover:text-white transition">
+                <Instagram size={20} />
+              </a>
+            </div>
           </div>
         </div>
+
+        {/* BOTTOM BAR */}
+        <div className="border-t border-slate-800 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-slate-400">
+          <p>
+            © {new Date().getFullYear()} CareerBridge India Pvt. Ltd. All rights reserved.
+          </p>
+
+          <div className="flex gap-6 mt-4 md:mt-0">
+            <Link to="/privacy" className="hover:text-white transition">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="hover:text-white transition">
+              Terms of Service
+            </Link>
+            <Link to="/cookies" className="hover:text-white transition">
+              Cookie Policy
+            </Link>
+          </div>
+        </div>
+
       </div>
     </footer>
   );

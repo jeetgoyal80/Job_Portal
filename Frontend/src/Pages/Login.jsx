@@ -13,6 +13,7 @@ const Login = () => {
     password: '',
     role: 'student',
   });
+ 
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,11 +32,13 @@ const Login = () => {
     payload.append('email', loginData.email);
     payload.append('password', loginData.password);
     payload.append('role', loginData.role);
-
+    console.log(payload);
+    
     try {
       const res = await axios.post(`${EndPointUserURL}/login`, payload, {
         withCredentials: true,
       });
+      console.log("jhbdjhs"+ EndPointUserURL);
 
       if (res.data.success) {
         toast.success(res.data.message || 'Login successful');

@@ -6,8 +6,9 @@ const db = require('./utils/db');
 const colors = require('colors');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const PORT = process.env.PORT ||  4000;
 dotenv.config({});
+const PORT = process.env.PORT ||  4000;
+
 
 
 
@@ -20,7 +21,7 @@ app.use(morgan('dev'));
 
 
 app.use(cors({
-  origin: 'https://job-portal-1-5puv.onrender.com',
+  origin: 'http://localhost:5173',
   credentials: true
 }));
 

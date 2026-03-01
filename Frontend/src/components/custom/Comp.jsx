@@ -1,74 +1,95 @@
-import React, { useState } from 'react';
-import { Bookmark, BookmarkCheck, Clock, Users, Briefcase } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { Bookmark, BookmarkCheck, MapPin, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const formatSalary = (salary) => {
+  if (!salary) return "Not disclosed";
+  const lpa = (Number(salary) / 100000).toFixed(1);
+  return `₹${lpa} LPA`;
+};
 
 const Comp = ({ job }) => {
   const [saved, setSaved] = useState(false);
-  const id = job?._id || 'default-id';
+  const id = job?._id || "default-id";
 
   const handleSave = () => setSaved(!saved);
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
-      initial={{ opacity: 0, y: 20 }}
+      whileHover={{ y: -4 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="max-w-md w-full bg-white border border-gray-100 shadow-lg rounded-3xl p-6 relative overflow-hidden"
+      transition={{ duration: 0.25 }}
+      className="w-full bg-white border border-gray-200 rounded-2xl p-5 hover:shadow-md transition-all duration-300"
     >
-      {/* Top Right Save Icon and Posted Time */}
-      <div className="absolute top-4 right-4 flex items-center gap-2 text-sm text-gray-400">
-        <button onClick={handleSave} className="hover:text-black transition">
-          {saved ? <BookmarkCheck size={18} className="text-black" /> : <Bookmark size={18} />}
-        </button>
-        <span>{job?.postedAgo || 'Recently posted'}</span>
-      </div>
+      {/* Header */}
+      <div className="flex justify-between items-start">
+        <div className="flex items-start gap-4">
+          <img
+            src={job?.company?.logo || "/default-logo.png"}
+            alt={job?.company?.name || "Company"}
+            className="w-12 h-12 rounded-xl object-cover border"
+          />
 
-      {/* Company Logo and Info */}
-      <div className="flex items-center gap-4 mb-4">
-        <img
-          src={job?.company?.logo || '/default-logo.png'}
-          alt={job?.company?.name || 'Company'}
-          className="w-12 h-12 rounded-xl object-cover border"
-        />
-        <div>
-          <h3 className="text-lg font-semibold text-gray-800">{job?.company?.name || 'Unknown Company'}</h3>
-          <span className="text-sm text-gray-500">{job?.title || 'Job Title'}</span>
+          <div>
+            <h3 className="text-base font-semibold text-gray-900">
+              {job?.title || "Job Title"}
+            </h3>
+
+            <p className="text-sm text-gray-600 mt-1">
+              {job?.company?.name || "Unknown Company"}
+            </p>
+
+            <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
+              <span className="flex items-center gap-1">
+                <MapPin size={14} />
+                {job?.locations || "Location"}
+              </span>
+
+              <span className="flex items-center gap-1">
+                <Clock size={14} />
+                {job?.postedAgo || "Recently posted"}
+              </span>
+            </div>
+          </div>
         </div>
+
+        {/* Save Icon */}
+        <button
+          onClick={handleSave}
+          className="text-gray-400 hover:text-black transition"
+        >
+          {saved ? (
+            <BookmarkCheck size={18} className="text-black" />
+          ) : (
+            <Bookmark size={18} />
+          )}
+        </button>
       </div>
 
       {/* Description */}
-      <p className="text-gray-700 text-sm leading-relaxed mb-4">
-        {job?.description || 'No description available.'}
+      <p className="text-sm text-gray-600 mt-4 line-clamp-3">
+        {job?.description || "No description available."}
       </p>
 
-      {/* Meta Info Tags */}
-      <div className="flex flex-wrap gap-3 text-sm text-gray-700 mb-5">
-        <span className="bg-gray-100 px-3 py-1.5 rounded-full flex items-center gap-1">
-          <Users size={14} /> Positions: {job?.position ?? 'N/A'}
-        </span>
-        <span className="bg-blue-100 text-blue-800 px-3 py-1.5 rounded-full flex items-center gap-1">
-          <Briefcase size={14} /> {job?.jobtype || 'Job Type'}
-        </span>
-        <span className="bg-green-100 text-green-800 px-3 py-1.5 rounded-full">
-          {job?.salary ? `₹${job.salary}` : 'Salary not specified'}
-        </span>
-      </div>
+      {/* Footer */}
+      <div className="flex justify-between items-center mt-6">
+        <div className="flex items-center gap-4 text-sm text-gray-700">
+          <span className="px-3 py-1 bg-gray-100 rounded-full">
+            {job?.jobtype || "Full Time"}
+          </span>
 
-      {/* Action Buttons */}
-      <div className="flex justify-between">
+          <span className="font-medium text-gray-900">
+            {formatSalary(job?.salary)}
+          </span>
+        </div>
+
         <Link to={`/details/${id}`}>
-          <button className="px-5 py-2 bg-black text-white text-sm rounded-lg hover:bg-gray-900 transition">
-            View Details
+          <button className="px-4 py-2 text-sm font-medium bg-gray-900 text-white rounded-xl hover:bg-black transition">
+            View
           </button>
         </Link>
-        <button
-          onClick={handleSave}
-          className="px-5 py-2 border border-black text-sm rounded-lg hover:bg-black hover:text-white transition"
-        >
-          {saved ? 'Saved' : 'Save for Later'}
-        </button>
       </div>
     </motion.div>
   );

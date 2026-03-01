@@ -25,6 +25,7 @@ const companySchema = new mongoose.Schema({
   },
   logo: {
     type: String, // Ideally URL or path to stored image
+    default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa0ljCZ3eGK8Crf7CRDkHI_tSGNFznfNBnEQ&s"
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
